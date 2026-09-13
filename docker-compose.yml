@@ -1,0 +1,24 @@
+
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./deployment_files
+      dockerfile: Dockerfile
+    ports:
+      - "7860:7860"
+    environment:
+      PYTHONUNBUFFERED: 1
+    container_name: superkart_backend
+
+  frontend:
+    build:
+      context: ./frontend_files
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    environment:
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - backend
+    container_name: superkart_frontend
